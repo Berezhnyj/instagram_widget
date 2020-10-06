@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<gadget>
+  <name>Instagram</name>
+  <namespace>Example.Azim</namespace>
+  <version>1.0.0.0</version>
+  <copyright>&#169; 2019</copyright>
+  <description>"Heads up display" style time and date</description>
+  <author name="Instagram">
+    <info url="www.example.com" />
+  </author>
+  <icons>
+    <icon src="images/logo.png" />
+  </icons>
+  <copyright>Instagram</copyright>
+  <description>Instagram</description>
+  <hosts>
+    <host name="sidebar">
+      <base type="HTML" apiVersion="1.0.0" src="Instagram.html" />
+      <platform minPlatformVersion="1.0" />
+      <permissions>Full</permissions>
+    </host>
+  </hosts>
+</gadget>

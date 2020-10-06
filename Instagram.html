@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Digital Clock</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&display=swap&subset=cyrillic" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+	
+	<style>
+		body {
+			background-size: cover;
+			overflow: hidden;
+			margin: 0;
+			text-align: center;
+			padding-top: 25px;
+			border-radius: 10px;
+			font-family: 'Poiret One';
+			width: 280px;
+			font-size: 15px;
+			color: white;
+			font-size: 16px;
+		}
+		#folowersContent {
+			
+			border-radius: 20px;
+			padding-top:10px;
+		}
+		#box-left {
+			width: 120px;
+			height: 90px;
+			background: #333333;
+			float: left;
+			padding: 10px;
+		}		
+		#box-right {
+			width: 120px;
+			height: 90px;
+			background: #1e1e1e;
+			float: left;
+			padding: 10px;
+		}
+	</style>
+</head>
+<body onload="DoInit()">
+<g:background id="background" style="position:absolute; width: 340px; color: white; z-index:-1; top:0; left:0; opacity="1">
+	<div id="box-left">
+		<div id="usernameContent">usernameContent</div>
+		<div id="folowersContent">folowersContent</div>
+	</div>
+	<div id="box-right">
+		<div id="username">usernameContent</div>
+		<div id="444">folowersContent</div>
+	</div>
+</g:background>
+<SCRIPT Language="VBScript">
+	'Вызов функции JavaScript из области VBS
+	function isDocked
+		isDocked = isDockedJS()
+	End Function    
+</script>
+<script src="main.vbs" type="text/vbscript"></script>
+
+<SCRIPT Language="JavaScript">
+    docked = 0;
+    function isDockedJS() { 
+      return docked;
+    }
+</SCRIPT>
+
+<script language="JavaScript">
+	function reqListener () {
+		//test.innerHTML="<p>Tests:</p>";
+		var tag_follow = "edge_followed_by";
+		var tag_username = "username";
+		var tag_likes = "edge_media_preview_like";
+		var tag_media = "edge_owner_to_timeline_media";
+		
+		var profile = this.responseText.split('"') + '';
+		var position_follower = profile.indexOf(tag_follow);
+		var position_username = profile.indexOf(tag_username);
+		var position_media = profile.indexOf(tag_media);
+		
+		var follower = profile.slice(position_follower+27, position_follower+27+10).split("}")[0];
+		var username = profile.slice(position_username+11, position_username+11+30).split(",")[0];
+		var media = parseInt(profile.slice(position_media+39, position_media+39+30).split(",")[0]);
+		//console.log(profile);
+		folowersContent.innerHTML="<p>Followers: " + follower + "</p>";
+	};
+	function DoInit(){
+	
+		var xhr = new XMLHttpRequest();
+		xhr.onload = reqListener;
+		xhr.open('GET', 'https://www.instagram.com/igor_berezhniy/?__a=1', false);
+		xhr.send();
+		//test.innerHTML="<p>Tests:</p>";
+		var profiles = xhr.responseText.split('"') + '';
+		
+		var tag_follow = "edge_followed_by";
+		var tag_username = "username";
+		
+		var position_follower = profiles.indexOf(tag_follow);
+		var position_username = profiles.indexOf(tag_username);
+		
+		var follower = profiles.slice(position_follower+27, position_follower+27+10).split("}")[0];
+		//var username = profiles.slice(position_username+11, position_username+11+30).split(",")[0];
+					folowersContent.innerHTML="<div>Followers: " + position_username + "</div>";
+			usernameContent.innerHTML="<div>Followers: " + follower + "</div>";
+		if (xhr.status != 200) statusContent.innerHTML="<p>"+xhr.status + ": " + xhr.statusText+"</p>";
+		else {
+
+		};
+		//setTimeout("DoInit()",10000); // Display time after every one second	
+	};
+	DoInit();
+</script>
+	
+
+</body>
+</html>
